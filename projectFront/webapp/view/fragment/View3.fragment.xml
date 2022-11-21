@@ -1,0 +1,54 @@
+<!-- Cadastrar clientes-->
+
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" 
+   xmlns:l="sap.ui.layout">
+   
+<l:VerticalLayout class="sapUiContentPadding" width="100%">
+
+        <Label text="NOME" 
+               labelFor="input-a" 
+               design="Bold"/> 
+        <Input id="input-a" required="true"/>
+
+        <Label text="SOBRENOME" 
+               labelFor="input-b" 
+               design="Bold"/>
+        <Input id="input-b" required="true"/>
+
+        <Label text="TELEFONE" 
+               labelFor="input-c"
+               design="Bold"/>
+        <Input id="input-c"/>
+
+        <Label text="WHATSAPP" 
+               labelFor="input-d"
+               design="Bold"/>
+        <Input id="input-d"/>
+
+        <Label text="ENDEREÇO" 
+               labelFor="input-e" 
+               design="Bold"/>
+        <Input id="input-e" required="true"/>
+
+        <Label text="CEP" 
+               labelFor="input-f"
+               design="Bold"/>
+        <Input id="input-f"/>
+
+        <Label text="TEMPO DE CONSUMO" 
+               labelFor="input-g"
+               design="Bold"/>
+        <Input id="input-g"/>
+
+        <Toolbar>
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="Cadastrar" press="onPress" />
+				
+		</Toolbar>
+
+
+</l:VerticalLayout>
+  
+</core:FragmentDefinition>

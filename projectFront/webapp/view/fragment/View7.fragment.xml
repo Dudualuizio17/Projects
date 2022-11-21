@@ -1,0 +1,54 @@
+<!-- Inserir Vendas-->
+
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" 
+   xmlns:l="sap.ui.layout"
+   xmlns:mvc="sap.ui.core.mvc">
+   
+<l:VerticalLayout class="sapUiContentPadding" width="100%">
+
+        <Label text="PRODUTO" 
+               labelFor="input-k" 
+               design="Bold"/> 
+         <Input id="input-k" 
+                required="true"
+                showSuggestion="true"
+		  showValueHelp="true"
+		  valueHelpRequest=".onValueHelpRequest"
+		  suggestionItems="">
+			<suggestionItems>
+				
+			</suggestionItems>
+         </Input>
+
+        <Label text="CLIENTE" 
+               labelFor="input-l" 
+               design="Bold"/>
+        <Input id="input-l" required="true"/>
+
+        <Label text="TELEFONE" 
+               labelFor="input-m"
+               design="Bold"/>
+        <Input id="input-m" required="true"/>
+
+        <Label text="QUANTIDADE" 
+               labelFor="input-n"
+               design="Bold"/>
+        <Input id="input-n" required="true"/>
+
+        <Toolbar>
+				
+	       <Button type="Emphasized" text="INSERIR NOVO PRODUTO" press="onPress" />	
+	</Toolbar>
+
+		<core:Fragment fragmentName="projectbetelgas.view.fragment.View10" type="XML" />
+
+        <Toolbar>
+		<ToolbarSpacer/>
+		<Button type="Emphasized" text="CONCLUIR VENDA" press="onPress" />
+	</Toolbar>
+
+</l:VerticalLayout>
+  
+</core:FragmentDefinition>

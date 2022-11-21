@@ -1,0 +1,18 @@
+/* Enter your custom styles here */
+.aumentarFonte{
+    font-size: 35px;
+    font-weight: normal ;
+    color: black;
+}
+
+.salesFont {
+    font-size: 10px ;
+    font-weight: normal ;
+    color: black;
+}
+
+.headerHomeFont {
+    
+    font-weight: bold ;
+    color: black;
+}

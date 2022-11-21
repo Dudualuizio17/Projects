@@ -1,0 +1,33 @@
+<mvc:View 
+ controllerName="projectbetelgas.controller.View1"
+ xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+ xmlns:l="sap.ui.layout" 
+ xmlns="sap.m">
+
+    <Page id="page" title="{i18n>title}">
+
+        <content>
+            <l:VerticalLayout class="sapUiContentPadding" width="30%">
+				<Title text="Login" level="H1" />
+                <Label text="Name" labelFor="nameInput" />
+                <Input id="nameInput" 
+					   class="sapUiSmallMarginBottom" 
+					   placeholder="Enter name" 
+					   valueStateText="Name must not be empty. Maximum 15 characters." 
+					   value="{
+				path : '/name',
+				type : 'sap.ui.model.type.String',
+				constraints : {
+					minLength: 1,
+					maxLength: 10
+				}
+			}" change=".onNameChange" />
+
+                <Label text="Password" labelFor="passwordInput" />
+                <Input id="passwordInput" type="Password" placeholder="Enter password" />
+
+                <Button text="Submit" press=".validateLogin" />
+            </l:VerticalLayout>
+        </content>
+    </Page>
+</mvc:View>

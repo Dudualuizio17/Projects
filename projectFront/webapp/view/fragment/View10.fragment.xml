@@ -1,0 +1,30 @@
+<!-- Visualização das vendas antes de concluir-->
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" 
+   xmlns:l="sap.ui.layout"
+   xmlns:mvc="sap.ui.core.mvc">
+   
+<l:VerticalLayout class="sapUiContentPadding" width="100%">
+	
+			<List class="salesFont"
+				headerText="Produtos Selecionados" 
+				items="{/EntryCollection}" >
+				<FeedListItem
+					sender="{Author}"
+					icon="sap-icon://sales-order-item"
+					senderPress="onPress"
+					iconPress="onPress"
+					iconDensityAware="false"
+					info="{Type}"
+					timestamp="{Date}"
+					text="{Text}"
+					convertLinksToAnchorTags="All"
+					actions="{path: 'Actions', templateShareable: false}">
+					<FeedListItemAction text="{Text}" icon="{Icon}" key="{Key}" press="onActionPressed" />
+				</FeedListItem>
+			</List>
+            
+</l:VerticalLayout>
+  
+</core:FragmentDefinition>

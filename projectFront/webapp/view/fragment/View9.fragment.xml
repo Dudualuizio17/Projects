@@ -1,0 +1,58 @@
+<!--Estoque-->
+<core:FragmentDefinition
+	controllerName="sap.m.sample.Table.Table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+		
+	<Table id="idProductsTable4"
+		inset="false"
+		items="{
+			path: 'modelEstoque>/aEstoque',
+			sorter: {
+				path: 'Name'
+			}
+		}">
+		<headerToolbar>
+			<OverflowToolbar>
+
+
+			</OverflowToolbar>
+		</headerToolbar>
+
+		<columns>
+			
+			<Column
+				width="12em">
+				<Text text="Produto" />
+			</Column>
+
+            <Column
+                 width="12em">
+				<Text text="Descrição" />
+			</Column>
+
+
+            <Column
+				width="12em">
+				<Text text="Quantidade" />
+			</Column>
+
+
+		</columns>
+
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text
+						text="{modelEstoque>produto}" />
+					<Text
+						text="{modelEstoque>descricao}" />
+                    <Text
+						text="{modelEstoque>quantidade}" /> 
+				</cells>
+
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

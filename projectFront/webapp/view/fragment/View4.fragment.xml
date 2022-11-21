@@ -1,0 +1,85 @@
+<!-- Visualizar Clientes-->
+
+<core:FragmentDefinition
+	controllerName="sap.m.sample.Table.Table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Table id="idProductsTable"
+		inset="false"
+		items="{
+			path: 'modelCliente>/aNome',
+			sorter: {
+				path: 'Name'
+			}
+		}">
+		<headerToolbar>
+			<OverflowToolbar>
+				
+			</OverflowToolbar>
+		</headerToolbar>
+
+		<columns>
+			<Column
+				width="12em">
+				<Text text="Nome" />
+			</Column>
+
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Sobrenome" />
+			</Column>
+
+            <Column
+				width="12em">
+				<Text text="Telefone" />
+			</Column>
+
+            <Column
+				width="12em">
+				<Text text="Endereço" />
+			</Column>
+
+            <Column
+				width="12em">
+				<Text text="Cep" />
+			</Column>
+
+            <Column
+				width="12em">
+				<Text text="Tempo de Consumo" />
+			</Column>
+
+			<Column
+				width="5em">       
+                <Text text=" " />
+			</Column>
+            
+
+		</columns>
+
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text
+						text="{modelCliente>nome}" />
+					<Text
+						text="{modelCliente>sobrenome}" />
+                    <Text
+						text="{modelCliente>telefone}" />
+                    <Text
+						text="{modelCliente>endereço}" />
+                    <Text
+						text="{modelCliente>cep}" />
+                    <Text
+						text="{modelCliente>tempoDeConsumo}" />
+					<Button
+						text="Excluir" click="handleClick" design="Negative" />     
+					
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+</core:FragmentDefinition>
