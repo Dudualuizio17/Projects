@@ -1,85 +1,76 @@
 <!-- Visualizar Clientes-->
-
-<core:FragmentDefinition
-	controllerName="sap.m.sample.Table.Table"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core"
+<core:FragmentDefinition 
+	controllerName="sap.m.sample.Table.Table" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:core="sap.ui.core" 
 	xmlns="sap.m">
-	<Table id="idProductsTable"
-		inset="false"
-		items="{
+
+    <Table 
+	id="idProductsTable" 
+	inset="false" 
+	items="{
 			path: 'modelCliente>/aNome',
 			sorter: {
 				path: 'Name'
 			}
 		}">
-		<headerToolbar>
-			<OverflowToolbar>
-				
-			</OverflowToolbar>
-		</headerToolbar>
 
-		<columns>
-			<Column
-				width="12em">
-				<Text text="Nome" />
-			</Column>
+        <headerToolbar>
+            <OverflowToolbar />
+        </headerToolbar>
 
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true">
-				<Text text="Sobrenome" />
-			</Column>
+        <columns>
+            <Column width="12em">
+                <Text text="Nome" />
+            </Column>
 
-            <Column
-				width="12em">
-				<Text text="Telefone" />
-			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true">
+                <Text text="Sobrenome" />
+            </Column>
 
-            <Column
-				width="12em">
-				<Text text="Endereço" />
-			</Column>
+            <Column width="12em">
+                <Text text="Telefone" />
+            </Column>
 
-            <Column
-				width="12em">
-				<Text text="Cep" />
-			</Column>
+            <Column width="12em">
+                <Text text="Endereço" />
+            </Column>
 
-            <Column
-				width="12em">
-				<Text text="Tempo de Consumo" />
-			</Column>
+            <Column width="12em">
+                <Text text="Cep" />
+            </Column>
 
-			<Column
-				width="5em">       
+
+            <Column width="5em">
                 <Text text=" " />
-			</Column>
-            
+            </Column>
+        </columns>
 
-		</columns>
+        <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <Text text="{modelCliente>name_cli}" />
+                    <Text text="{modelCliente>surname_cli}" />
+                    <Text text="{modelCliente>fone1_cli}" />
+                    <Text text="{modelCliente>adress_cli}" />
+                    <Text text="{modelCliente>cep_cli}" />
+                    
+					<HBox>
+					    <items>
+						    <MenuButton text="Option">
+							   
+							    <Menu>
+							        <MenuItem text="Editar" icon="sap-icon://edit" press="onPressEdit"/>
+								
+							        <MenuItem text="Excluir" icon="sap-icon://delete" press="onPressDelete" />
+							    </Menu>
 
-		<items>
-			<ColumnListItem vAlign="Middle">
-				<cells>
-					<Text
-						text="{modelCliente>nome}" />
-					<Text
-						text="{modelCliente>sobrenome}" />
-                    <Text
-						text="{modelCliente>telefone}" />
-                    <Text
-						text="{modelCliente>endereço}" />
-                    <Text
-						text="{modelCliente>cep}" />
-                    <Text
-						text="{modelCliente>tempoDeConsumo}" />
-					<Button
-						text="Excluir" click="handleClick" design="Negative" />     
-					
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
-
+						    </MenuButton>
+						</items>	
+					</HBox>	
+                    			
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </core:FragmentDefinition>

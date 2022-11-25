@@ -1,0 +1,54 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" 
+   xmlns:l="sap.ui.layout"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:f="sap.ui.layout.form">
+
+<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay254"
+			layout="ResponsiveGridLayout"
+			title="Address"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="NOME" />
+                <Input id="input-a"  value="{oModelEditCli>/name_cli}" />
+
+                <Label text="SOBRENOME" />
+				<Input id="input-b"  value="{oModelEditCli>/surname_cli}" />
+
+				<Label text="TELEFONE" />
+				<Input id="input-c" value="{oModelEditCli>/fone1_cli}" />
+
+				<Label text="WHATSAPP" />
+				<Input id="input-d" value="{oModelEditCli>/fone2_cli}" />
+
+                <Label text="ENDEREÇO" />
+				<Input id="input-e" value="{oModelEditCli>/adress_cli}" />
+
+                <Label text="CEP" />
+				<Input id="input-f" value="{oModelEditCli>/cep_cli}" />
+                            
+			</f:content>
+
+                     <Toolbar>
+	               <ToolbarSpacer/>
+	                      <Button type="Emphasized" id="btnCliente" text="Cadastrar" press="onPress" />
+                     </Toolbar>
+
+		</f:SimpleForm>
+	</VBox>
+
+   </core:FragmentDefinition>
