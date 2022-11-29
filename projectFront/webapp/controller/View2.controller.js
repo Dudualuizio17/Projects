@@ -14,10 +14,12 @@ sap.ui.define([
 		onInit() {
 
 			window.modoFormularioCliente = "cadastro"
+			window.modoFormularioProduto = "cadastroProd"
 
 			this.selectClientTable();
+			this.selectProdTable();
 
-			var oDataSetModelProd = {
+			/*var oDataSetModelProd = {
 
 				aProduto: [
 					{
@@ -26,7 +28,7 @@ sap.ui.define([
 				]
 
 
-			}
+			}*/
 
 			var oDataSetModelVenda = {
 
@@ -63,13 +65,13 @@ sap.ui.define([
 				price: 17600
 			}
 
-			var oModelProd = new JSONModel(oDataSetModelProd);
+			//var oModelProd = new JSONModel(oDataSetModelProd);
 			var oModelVenda = new JSONModel(oDataSetModelVenda);
 			var oModelEstoque = new JSONModel(oDataSetModelEstoque);
 			var oModelCaixa = new JSONModel(oDataSetModelCaixa);
 
 
-			this.getView().setModel(oModelProd, "modelProd");
+			//this.getView().setModel(oModelProd, "modelProd");
 			this.getView().setModel(oModelVenda, "modelVenda");
 			this.getView().setModel(oModelEstoque, "modelEstoque");
 			this.getView().setModel(oModelCaixa, "modelCaixa");
@@ -122,7 +124,7 @@ sap.ui.define([
 
 			var that = this;
 
-			
+
 
 			if (window.modoFormularioCliente == "cadastro") {
 				var oPostClient = {
@@ -171,7 +173,6 @@ sap.ui.define([
 
 				var oUpdateCliente = that.getView().getModel("oModelEditCli").getData();
 
-
 				$.ajax({
 					type: "PUT",
 					url: "http://localhost:3000/clientes",
@@ -206,32 +207,11 @@ sap.ui.define([
 
 			}
 
-
-
-
-
-
-
-			// Selecionando por id
-			/*$.ajax({
-				type: "GET",
-				url: "http://localhost:3000/clientes/1",
-
-				success: function (oResponse) {
-					debugger
-
-				},
-				error: function (oResponse) {
-					debugger
-				}
-			});*/
-
 		},
-
 
 		onPressEdit: function (oEvent) {
 			debugger
-		var	that = this;
+			var that = this;
 			//Pegar o elemento que foi clicado, guardar na variavel esse objeto
 			//criar um model com a variavel criada, mandando como parametro de definição
 			//Setar o model na view com o alias que já está definido (oModelEditCli)
@@ -247,25 +227,7 @@ sap.ui.define([
 
 			that.getView().byId("idIconTabBarCliente").setSelectedKey(0)
 
-
-
-			// Alterando um cliente
-			/*$.ajax({
-				type: "PUT",
-				url: "http://localhost:3000/clientes",
-				data: oPostClient,
-
-				success: function (oResponse) {
-					debugger
-				},
-				error: function (oResponse) {
-					debugger
-				}
-			});*/
-
 		},
-
-
 
 		onPressDelete: function (oEvent) {
 			debugger
@@ -336,6 +298,39 @@ sap.ui.define([
 		},
 
 		//Produtos
+		selectProdTable() {
+			var that = this;
+
+			//Selecionando todos os Produtos
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:3000/produtos/product",
+
+				success: function (oResponse) {
+					debugger
+					var oModelProd = new JSONModel({
+						aProduto: oResponse.response
+					});
+
+					that.getView().setModel(oModelProd,"modelProd");
+				},
+				error: function (oResponse) {
+					debugger
+				}
+			});
+
+		},
+
+		clearFormInputProd: function (oParam) {
+			debugger
+			oParam.oInputNomePdt.setValue("")
+			oParam.oInputDescriptionPdt.setValue("")
+			oParam.oInputStockControl.setValue("")
+			oParam.oInputStockMin.setValue("")
+			oParam.oInputPricePdt.setValue("")
+
+		},
+
 		onPressPdt: function (evt) {
 			debugger
 			var oInputNomePdt = this.getView().byId("input-h")
@@ -345,40 +340,175 @@ sap.ui.define([
 			var oInputPricePdt = this.getView().byId("input-l")
 
 			var oCreateData = new Date();
-			var oPostProduct = {
-				"name_pdt": oInputNomePdt.getValue(),
-				"description_pdt": oInputDescriptionPdt.getValue(),
-				"stock_control_pdt": oInputStockControl.getValue(),
-				"stock_min_pdt": oInputStockMin.getValue(),
-				"creation_date_pdt": oCreateData.toISOString().slice(0, 10),
-				"price_pdt": oInputPricePdt.getValue(),
-				"status_pdt": 1
+
+			var that = this;
+
+			if (window.modoFormularioProduto == "cadastroProd") {
+				var oPostProduct = {
+
+					"name_pdt": oInputNomePdt.getValue(),
+					"description_pdt": oInputDescriptionPdt.getValue(),
+					"stock_control_pdt": oInputStockControl.getValue(),
+					"stock_min_pdt": oInputStockMin.getValue(),
+					"creation_date_pdt": oCreateData.toISOString().slice(0, 10),
+					"price_pdt": oInputPricePdt.getValue(),
+					"status_pdt": 1
+				}
+				// Inserindo um novo Produto
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:3000/produtos/product",
+					data: oPostProduct,
+
+					success: function (oResponse) {
+						debugger
+						var oParam = {
+							oInputNomePdt: oInputNomePdt,
+							oInputDescriptionPdt: oInputDescriptionPdt,
+							oInputStockControl: oInputStockControl,
+							oInputStockMin: oInputStockMin,
+							oInputPricePdt: oInputPricePdt
+						}
+
+						that.clearFormInputProd(oParam);
+
+						that.selectProdTable();
+
+						MessageToast.show("Cadastrado com Sucesso");
+					},
+					error: function (oResponse) {
+						debugger
+					},
+
+				});
+
 			}
-			// Inserindo um novo Produto
+
+			if (window.modoFormularioProduto == "editProd"){
+
+				var oUpdateProduto = that.getView().getModel("oModelEditProd").getData();
+
+				$.ajax({
+					type: "PUT",
+					url: "http://localhost:3000/produtos",
+					data: oUpdateProduto,
+
+					success: function (oResponse) {
+						debugger
+						var oParam = {
+							oInputNomePdt: oInputNomePdt,
+							oInputDescriptionPdt: oInputDescriptionPdt,
+							oInputStockControl: oInputStockControl,
+							oInputStockMin: oInputStockMin,
+							oInputPricePdt: oInputPricePdt
+						}
+
+						that.clearFormInputProd(oParam);
+
+						that.selectProdTable();
+
+						window.modoFormularioProduto = "cadastroProd";
+
+						that.getView().byId("btnProduto").setText("Cadastrar")
+
+						MessageToast.show("Atualizado com Sucesso");
+					},
+					error: function (oResponse) {
+						debugger
+					}
+
+				});
+
+			}
+
+		},
+
+		onPressEditProd: function (oEvent) {
+			debugger
+			var that = this;
+			//Pegar o elemento que foi clicado, guardar na variavel esse objeto
+			//criar um model com a variavel criada, mandando como parametro de definição
+			//Setar o model na view com o alias que já está definido (oModelEditCli)
+			//criar uma variavel global para decidir se é modo cadastro ou modo edição
+			var oLinhaClicadaProd = oEvent.getSource().getBindingContext("modelProd").getProperty()
+			var oModelProd = new JSONModel(oLinhaClicadaProd);
+
+			that.getView().setModel(oModelProd, "oModelEditProd");
+
+			that.getView().byId("btnProduto").setText("Atualizar");
+
+			window.modoFormularioCliente = "editProd"
+
+			that.getView().byId("idIconTabBarProduto").setSelectedKey(0)
+
+		},
+
+		onPressDeleteProd: function (oEvent) {
+			debugger
+			var that = this;
+			var oLinhaClicadaProd = oEvent.getSource().getBindingContext("modelProd").getProperty()
+
+
+			//DIALOG/MODAL/POPUP COM BOTAO
+			if (!oDialog) {
+
+				var oDialog = new sap.m.Dialog({
+					title: 'Excluir Produto',
+					content: new Text({ text: "Deseja deletar esse registro?" }),
+					beginButton: new Button({
+						text: 'Cancelar',
+						type: sap.m.ButtonType.Reject,
+						press: function () {
+							oDialog.close();
+						}
+					}),
+					endButton: new Button({
+						text: 'Confirmar',
+						type: sap.m.ButtonType.Accept,
+						press: function () {
+							oDialog.close();
+							that.deleteSliceProd(oLinhaClicadaProd.id_product_pdt, oLinhaClicadaProd.name_pdt);
+						}
+					}),
+					afterClose: function () {
+						oDialog.destroy();
+					}
+				});
+
+				that.getView().addDependent(oDialog);
+
+				oDialog.open();
+			} else {
+				oDialog.open();
+			}
+
+		},
+
+		deleteSliceProd: function (sIddelecaoProd, sNameDelecaoProd) {
+			var that = this;
+
+			var oPayloadDelecaoProd = {
+				"id_product_pdt": sIddelecaoProd,
+				"name_pdt": sNameDelecaoProd
+			}
+			// Deletando um cliente
 			$.ajax({
-				type: "POST",
+				type: "DELETE",
 				url: "http://localhost:3000/produtos/product",
-				data: oPostProduct,
+				data: oPayloadDelecaoProd,
 
 				success: function (oResponse) {
 					debugger
-					oInputNomePdt.setValue("")
-					oInputDescriptionPdt.setValue("")
-					oInputStockControl.setValue("")
-					oInputStockMin.setValue("")
-					oInputPricePdt.setValue("")
-
+					MessageToast.show("Item " + sIddelecaoProd + " " + sNameDelecaoProd + " Deletado com Sucesso");
+					that.selectProdTable();
 				},
-
 				error: function (oResponse) {
+					debugger
+				}
+			})
 
-				},
-
-			});
-
-
-			MessageToast.show(evt.getSource().getId() + "Pressed");
 		},
+
 
 		/*onPressSales: function(evt) {
 			debugger

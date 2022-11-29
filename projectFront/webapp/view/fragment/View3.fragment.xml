@@ -1,5 +1,4 @@
 <!-- Cadastrar clientes-->
-
 <core:FragmentDefinition
    xmlns="sap.m"
    xmlns:core="sap.ui.core" 

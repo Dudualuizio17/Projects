@@ -1,0 +1,52 @@
+<!--Cadastrar Produto-->
+<core:FragmentDefinition 
+xmlns="sap.m" 
+xmlns:core="sap.ui.core" 
+xmlns:l="sap.ui.layout" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:f="sap.ui.layout.form">
+
+    <VBox class="sapUiSmallMargin">
+        <f:SimpleForm
+            id="SimpleFormDisplay354"
+            layout="ResponsiveGridLayout"
+            title="Cadastro"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            singleContainerFullSize="false"
+        >
+            <f:content>
+                <Label text="NOME PRODUTO" />
+                <Input id="input-h" value="{oModelEditProd>/name_pdt}" />
+
+                <Label text=" DESCRIÇÃO" />
+                <Input id="input-i" value="{oModelEditProd>/description_pdt}" />
+
+                <Label text="CONTROLE ESTOQUE" />
+                <Input id="input-j" value="{oModelEditProd>/stock_control_pdt}" />
+
+                <Label text="ESTOQUE MINIMO" />
+                <Input id="input-k" value="{oModelEditProd>/stock_min_pdt}" />
+
+                <Label text="PREÇO" />
+                <Input id="input-l" value="{oModelEditProd>/price_pdt}" />
+            </f:content>
+
+            <Toolbar>
+            <ToolbarSpacer />
+            <Button type="Emphasized" id="btnProduto" text="Cadastrar" press="onPressPdt" />
+            </Toolbar>
+
+        </f:SimpleForm>
+    </VBox>
+</core:FragmentDefinition>
