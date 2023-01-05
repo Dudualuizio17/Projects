@@ -1,33 +1,42 @@
 <mvc:View 
  controllerName="projectbetelgas.controller.View1"
- xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+ xmlns:mvc="sap.ui.core.mvc"  
  xmlns:l="sap.ui.layout" 
- xmlns="sap.m">
+ xmlns="sap.m"
+ xmlns:f="sap.ui.layout.form">
 
-    <Page id="page" title="{i18n>title}">
 
-        <content>
-            <l:VerticalLayout class="sapUiContentPadding" width="30%">
-				<Title text="Login" level="H1" />
-                <Label text="Name" labelFor="nameInput" />
-                <Input id="nameInput" 
-					   class="sapUiSmallMarginBottom" 
-					   placeholder="Enter name" 
-					   valueStateText="Name must not be empty. Maximum 15 characters." 
-					   value="{
-				path : '/name',
-				type : 'sap.ui.model.type.String',
-				constraints : {
-					minLength: 1,
-					maxLength: 10
-				}
-			}" change=".onNameChange" />
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay257"
+			layout="ResponsiveGridLayout"
+			title="LOGIN"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="EMAIL" />
+                <Input id="emailInput" placeholder="Enter Email"  type="Email" />
 
-                <Label text="Password" labelFor="passwordInput" />
-                <Input id="passwordInput" type="Password" placeholder="Enter password" />
+                <Label text="Senha" />
+				<Input id="passwordInput"  type="Password" placeholder="Enter password" />
+                            
+			</f:content>
 
-                <Button text="Submit" press=".validateLogin" />
-            </l:VerticalLayout>
-        </content>
-    </Page>
+                     <Toolbar>
+	               <ToolbarSpacer/>
+	                      <Button type="Emphasized" id="btnLogin" text="Entrar" press="onPressLogin" />
+                     </Toolbar>
+
+		</f:SimpleForm>
+	</VBox>
 </mvc:View>

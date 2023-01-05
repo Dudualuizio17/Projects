@@ -1,5 +1,6 @@
 <mvc:View
 	controllerName="projectbetelgas.controller.View2"
+	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core" 
@@ -133,17 +134,6 @@
 			</Page>
 
             <Page
-				id="stock"
-				title="Estoque"
-				backgroundDesign= "Solid"
-				showNavButton="true"
-				navButtonPress=".onPressDetailBack">
-				
-				 <core:Fragment fragmentName="projectbetelgas.view.fragment.View9" type="XML" />
-
-			</Page>
-
-            <Page
 				id="cashier"
 				title="Caixa"
 				backgroundDesign= "Solid"
@@ -155,18 +145,27 @@
 							<DateRangeSelection 
 							id="TotalDRS"
 							change=".changeDateTotal"/>
-						</VBox>
+					</VBox>
 					</HeaderContainer>
 
+					<l:VerticalLayout  width="50%" >
+						<l:BlockLayout id="idMainBlock">
+						<l:BlockLayoutRow accentCells="10">
+						<l:BlockLayoutCell
+							width="2"
+							titleAlignment="End"
+							title="">
+ 					
 		            <GenericTile 
-						class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" width="50%"
+						id="totalVendas"
+						class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" width="100%"
 						header="Vendas" 
 						subheader="Quantidade" 
 						press="press">
 
 						<TileContent footer="Betel Gás">
 						<l:VerticalLayout >
-							<Label class="aumentarFonte"  text="176"  withMargin="false" />
+							<Label class="aumentarFonte"  text="{modelCaixa>/sVendas}"  withMargin="false"  />
 						</l:VerticalLayout>
 						</TileContent>
 						
@@ -174,28 +173,23 @@
 
 					<GenericTile 
 						id="caixa2"
-						class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" width="50%"
+						class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" width="100%"
 						header="Caixa" 
 						subheader="Total" 
 						press="press">
 						
 						<TileContent footer="Betel Gás" >
 							<l:VerticalLayout >
-								<u:Currency class="aumentarFonte"  value= "{modelCaixa>/price}"  currency="{modelCaixa>/currency}" useSimbol="true"/>
+								<u:Currency class="aumentarFonte"  value= "{modelCaixa>/sCaixa}" />
                 			</l:VerticalLayout>
 						</TileContent>
 					
 					</GenericTile>
-
-					<!--<GenericTile 
-						class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" width="50%"
-						header="Caixa" 
-						subheader="Total" 
-						press="press">
-						<TileContent footer="Betel Gás">
-							<NumericContent value="120000" currency="{currency}" scale="R$" icon="sap-icon://simple-payment" x />
-						</TileContent>
-					</GenericTile>-->
+					
+					</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+					</l:BlockLayout>
+					</l:VerticalLayout>
 			</Page>
 
 		</detailPages>
@@ -211,7 +205,6 @@
 						<StandardListItem title="Clientes" type="Active" custom:to="client" />
 						<StandardListItem title="Produtos" type="Active" custom:to="products" />
 						<StandardListItem title="Vendas" type="Active" custom:to="sales" />
-                        <StandardListItem title="Estoque" type="Active" custom:to="stock" />
                         <StandardListItem title="Caixa" type="Active" custom:to="cashier" />
 					</items>
 				</List>

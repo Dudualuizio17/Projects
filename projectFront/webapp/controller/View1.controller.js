@@ -12,7 +12,7 @@ sap.ui.define([
 
             },
 
-            validateLogin: function (oEvent) {
+            onPressLogin: function (oEvent) {
 
             }
         });

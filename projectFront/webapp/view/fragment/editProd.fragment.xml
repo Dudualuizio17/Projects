@@ -32,14 +32,14 @@ xmlns:f="sap.ui.layout.form">
                 <Label text=" DESCRIÇÃO" />
                 <Input id="input-i" value="{oModelEditProd>/description_pdt}" />
 
-                <Label text="CONTROLE ESTOQUE" />
+                <Label text="QUANTIDADE EM ESTOQUE" />
                 <Input id="input-j" value="{oModelEditProd>/stock_control_pdt}" />
 
                 <Label text="ESTOQUE MINIMO" />
                 <Input id="input-k" value="{oModelEditProd>/stock_min_pdt}" />
 
                 <Label text="PREÇO" />
-                <Input id="input-l" value="{oModelEditProd>/price_pdt}" />
+                <Input id="input-l" value="{oModelEditProd>/price_pdt}"/>
             </f:content>
 
             <Toolbar>

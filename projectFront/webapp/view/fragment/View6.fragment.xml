@@ -25,22 +25,22 @@
 			
 			<Column
 				width="12em">
-				<Text text="Produto" />
+				<Text text="PRODUTO" />
 			</Column>
 
             <Column
                  width="12em">
-				<Text text="Descrição" />
+				<Text text="DESCRIÇÃO" />
 			</Column>
 
             <Column
 				width="12em">
-				<Text text="Preço" />
+				<Text text="PREÇO" />
 			</Column>
 
             <Column
 				width="12em">
-				<Text text="Quantidade Estoque" />
+				<Text text="QUANTIDADE ESTOQUE" />
 			</Column>
 
 			<Column
@@ -53,18 +53,14 @@
 		<items>
 			<ColumnListItem vAlign="Middle">
 				<cells>
-					<Text
-						text="{modelProd>produto}" />
-					<Text
-						text="{modelProd>descricao}" />
-                    <Text
-						text="{modelProd>preco}" />
-                    <Text
-						text="{modelProd>quantidadeEstoque}" />
+					<Text text="{modelProd>name_pdt}" />
+					<Text text="{modelProd>description_pdt}" />
+                    <Text text="{modelProd>price_pdt}" />
+                    <Text text="{modelProd>stock_control_pdt}" />
 					  
-						<HBox>
+					<HBox>
 					    <items>
-						    <MenuButton text="Option">
+						    <MenuButton text="Opções">
 							   
 							    <Menu>
 							        <MenuItem text="Editar" icon="sap-icon://edit" press="onPressEditProd"/>

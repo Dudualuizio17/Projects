@@ -9,7 +9,7 @@
 	id="idProductsTable" 
 	inset="false" 
 	items="{
-			path: 'modelCliente>/aNome',
+			path: 'modelCliente>/aCliente',
 			sorter: {
 				path: 'Name'
 			}
@@ -20,30 +20,35 @@
         </headerToolbar>
 
         <columns>
-            <Column width="12em">
-                <Text text="Nome" />
+            <Column width="8em">
+                <Text text="NOME" />
             </Column>
 
-            <Column minScreenWidth="Tablet" demandPopin="true">
-                <Text text="Sobrenome" />
+            <Column width="8em">
+                <Text text="SOBRENOME" />
             </Column>
 
-            <Column width="12em">
-                <Text text="Telefone" />
+            <Column width="8em">
+                <Text text="TELEFONE" />
             </Column>
 
-            <Column width="12em">
-                <Text text="Endereço" />
+            <Column width="9em">
+                <Text text="WHATSAPP" />
             </Column>
 
-            <Column width="12em">
-                <Text text="Cep" />
+            <Column width="13em">
+                <Text text="ENDEREÇO" />
             </Column>
 
-
-            <Column width="5em">
-                <Text text=" " />
+            <Column width="6em">
+                <Text text="CEP" />
             </Column>
+
+            <Column width="6em">
+                <Text text="" />
+            </Column>
+
+            
         </columns>
 
         <items>
@@ -52,12 +57,13 @@
                     <Text text="{modelCliente>name_cli}" />
                     <Text text="{modelCliente>surname_cli}" />
                     <Text text="{modelCliente>fone1_cli}" />
+                    <Text text="{modelCliente>fone2_cli}" />
                     <Text text="{modelCliente>adress_cli}" />
                     <Text text="{modelCliente>cep_cli}" />
                     
 					<HBox>
 					    <items>
-						    <MenuButton text="Option">
+						    <MenuButton text="Opções">
 							   
 							    <Menu>
 							        <MenuItem text="Editar" icon="sap-icon://edit" press="onPressEdit"/>

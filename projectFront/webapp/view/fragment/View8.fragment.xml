@@ -4,9 +4,81 @@
 	controllerName="sap.m.sample.Table.Table"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
-	xmlns="sap.m">
+	xmlns:m="sap.m"
+	xmlns="sap.ui.table"
+	xmlns:u="sap.ui.unified">
+
+	<Table id="idProductsTable3" 
+		   rows="{modelVenda>/aVenda}" 
+		   visibleRowCount="20"  
+		   filter="filterPrice" 
+		   ariaLabelledBy="title">
+
+		   	<extension>
+					<m:OverflowToolbar style="Clear">
+						<m:Title id="title" text="Products"/>
+						<m:ToolbarSpacer/>
+						<m:Button
+							icon="sap-icon://decline"
+							tooltip="Clear all filters"
+							press="clearAllFilters"/>
+						<m:ToolbarSeparator/>
+					</m:OverflowToolbar>
+				</extension>
+
+        <columns>
+            <Column 
+				width="11rem" 
+				filterProperty="Name">
+                <m:Label text="VENDA" />
+                <template>
+                    <m:Text text="{modelVenda>sale_id}" wrapping="false" />
+                </template>
+            </Column>
+            <Column 
+				width="11rem" 
+				filterProperty="Category" 
+				defaultFilterOperator="StartsWith">
+                <m:Label text="TOTAL VENDA(R$)" />
+                <template>
+                    <u:Currency value="{modelVenda>gross_amount_sl}" currency="{CurrencyCode}" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="9rem"
+			filterProperty="Data" >
+                <m:Label text="DATA" />
+                <template>
+                    <m:Text text="{path: 'modelVenda>creationdate_sl',
+								  type: 'sap.ui.model.type.Date',
+								  formatOptions: {style: 'short'}} " wrapping="false" />
+                </template>
+            </Column>
+            
+            <Column 
+				id="price" 
+				width="9rem" 
+				filterProperty="Price">
+                <m:Label text="CLIENTE" />
+                <template>
+                    <m:Text text="{modelVenda>fullName_sl}"  wrapping="false" />
+                </template>
+            </Column>
+            <Column 
+				width="6rem" 
+				hAlign="End" >
+                <m:Label text="" />
+                <template>
+                    <m:Label text="{}" />
+                </template>
+            </Column>
+        </columns>
+        <footer>
+            <m:OverflowToolbar id="infobar" ></m:OverflowToolbar>
+        </footer>
+    </Table>
+
 		
-	<Table id="idProductsTable3"
+<!--	<Table id="idProductsTable3"
 		inset="false"
 		items="{
 			path: 'modelVenda>/aVenda',
@@ -30,56 +102,50 @@
 		<columns>
 			
 			<Column
-				width="12em">
-				<Text text="Produto" />
+				width="20%">
+				<Text text="VENDA" />
 			</Column>
 
             <Column
-                 width="12em">
-				<Text text="Cliente" />
+				width="20%">
+				<Text text="TOTAL VENDA(R$)" />
 			</Column>
 
             <Column
-				width="12em">
-				<Text text="Preço" />
+				width="20%">
+				<Text text="DATA"/>
+			</Column>
+
+			<Column
+				width="30%">
+				<Text text="CLIENTE"/>
 			</Column>
 
             <Column
-				width="12em">
-				<Text text="Quantidade" />
+				width="10%">
+				
 			</Column>
-
-            <Column
-				width="12em">
-				<Text text="Data" />
-			</Column>
-
-            <Column
-				width="12em">
-				<Text text="Próxima Compra Estimada" />
-			</Column>
-
 
 		</columns>
 
 		<items>
 			<ColumnListItem vAlign="Middle">
 				<cells>
-					<Text
-						text="{modelVenda>produto}" />
-					<Text
-						text="{modelVenda>cliente}" />
-                    <Text
-						text="{modelVenda>preco}" />
-                    <Text
-						text="{modelVenda>quantidade}" />
-                    <Text
-						text="{modelVenda>data}" />
-                    <Text
-						text="{modelVenda>proximaCompraEstimada}" />    
+					<Text text="{modelVenda>sale_id}" />					
+                    <Text text="{modelVenda>gross_amount_sl}" /> 
+
+                    <Text text= "{path: 'modelVenda>creationdate_sl',
+								  type: 'sap.ui.model.type.Date',
+								  formatOptions: {style: 'short'}} "/>
+								  
+					<Text text="{modelVenda>fullName_sl}" />
+										       
+					<Button text="Itens" icon="sap-icon://sales-order-item" press="onPressItemSale"/>
+												
 				</cells>
 
 			</ColumnListItem>
 		</items>
-	</Table>
+	</Table> -->
+
 </core:FragmentDefinition>

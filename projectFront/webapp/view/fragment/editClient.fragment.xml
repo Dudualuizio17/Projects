@@ -30,10 +30,10 @@
 				<Input id="input-b"  value="{oModelEditCli>/surname_cli}" />
 
 				<Label text="TELEFONE" />
-				<Input id="input-c" value="{oModelEditCli>/fone1_cli}" />
+				<MaskInput mask="(99) 9999 9999" id="input-c" value="{oModelEditCli>/fone1_cli}" />
 
 				<Label text="WHATSAPP" />
-				<Input id="input-d" value="{oModelEditCli>/fone2_cli}" />
+				<MaskInput mask="(99) 99999 9999" id="input-d" value="{oModelEditCli>/fone2_cli}" />
 
                 <Label text="ENDEREÇO" />
 				<Input id="input-e" value="{oModelEditCli>/adress_cli}" />

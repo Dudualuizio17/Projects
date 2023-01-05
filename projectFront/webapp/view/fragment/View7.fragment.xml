@@ -1,54 +1,70 @@
 <!-- Inserir Vendas-->
+<core:FragmentDefinition 
+       xmlns="sap.m" 
+       xmlns:core="sap.ui.core" 
+       xmlns:l="sap.ui.layout" 
+       xmlns:mvc="sap.ui.core.mvc" 
+       xmlns:f="sap.ui.layout.form">
 
-<core:FragmentDefinition
-   xmlns="sap.m"
-   xmlns:core="sap.ui.core" 
-   xmlns:l="sap.ui.layout"
-   xmlns:mvc="sap.ui.core.mvc">
-   
-<l:VerticalLayout class="sapUiContentPadding" width="100%">
+       <VBox class="sapUiSmallMargin">
+              <items>
+              <f:SimpleForm
+              id="SimpleFormDisplay255"
+              layout="ResponsiveGridLayout"
+              title="Inserir Venda"
+              labelSpanXL="3"
+              labelSpanL="3"
+              labelSpanM="3"
+              labelSpanS="12"
+              adjustLabelSpan="false"
+              emptySpanXL="4"
+              emptySpanL="4"
+              emptySpanM="4"
+              emptySpanS="0"
+              columnsXL="1"
+              columnsL="1"
+              columnsM="1"
+              singleContainerFullSize="false">
 
-        <Label text="PRODUTO" 
-               labelFor="input-m" 
-               design="Bold"/> 
-         <Input id="input-m" 
-                required="true"
-                showSuggestion="true"
-		  showValueHelp="true"
-		  valueHelpRequest=".onValueHelpRequest"
-		  suggestionItems="">
-			<suggestionItems>
-				
-			</suggestionItems>
-         </Input>
+              <f:content>
+                     <Label text="CLIENTE" design="Bold" />
+                     <ComboBox id="nameSale" items="{
+                                          path: 'modelCliente>/aCliente',
+                                          sorter: {path: 'Name'}
+                                   }">
+                     <core:Item key="{modelCliente>client_id_cli}" text="{modelCliente>name_cli} {modelCliente>surname_cli}" />
+                     </ComboBox>
 
-        <Label text="CLIENTE" 
-               labelFor="input-n" 
-               design="Bold"/>
-        <Input id="input-n" required="true"/>
+                     <Label text="PRODUTO" design="Bold" />
+                     <ComboBox id="ProductSale" items="{
+                                          path: 'modelProd>/aProduto',
+                                   sorter: {path: 'Name'}
+                                   }">
+                     <core:Item key="{modelProd>id_product_pdt}" text="{modelProd>name_pdt} - R${modelProd>price_pdt}" />
+                     </ComboBox>
 
-        <Label text="TELEFONE" 
-               labelFor="input-o"
-               design="Bold"/>
-        <Input id="input-o" required="true"/>
+                     <Label text="QUANTIDADE" labelFor="input-p" design="Bold" />
+                     <Input id="input-p" required="true" />
 
-        <Label text="QUANTIDADE" 
-               labelFor="input-p"
-               design="Bold"/>
-        <Input id="input-p" required="true"/>
+                     <Toolbar>
+                     <ToolbarSpacer/> 
+                     <Button type="Emphasized" text="INSERIR NOVO PRODUTO" press="onPressNewProduct" />
+                     </Toolbar>
 
-        <Toolbar>
-				
-	       <Button type="Emphasized" text="INSERIR NOVO PRODUTO" press="onPressNewProduct" />	
-	</Toolbar>
+                     
+              </f:content>
+              </f:SimpleForm>
 
-		<core:Fragment fragmentName="projectbetelgas.view.fragment.View10" type="XML" />
+              <core:Fragment fragmentName="projectbetelgas.view.fragment.View10" type="XML" />
+              <Toolbar>
+              <ToolbarSpacer/> 
+              <Button type="Emphasized" text="CONCLUIR VENDA" press="onPressSales" />
+              </Toolbar>
 
-        <Toolbar>
-		<ToolbarSpacer/>
-		<Button type="Emphasized" text="CONCLUIR VENDA" press="onPressSales" />
-	</Toolbar>
+              </items>
+       </VBox>
 
-</l:VerticalLayout>
-  
+     
 </core:FragmentDefinition>
+
+
