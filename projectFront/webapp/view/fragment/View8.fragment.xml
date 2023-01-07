@@ -10,142 +10,77 @@
 
 	<Table id="idProductsTable3" 
 		   rows="{modelVenda>/aVenda}" 
-		   visibleRowCount="20"  
+		   visibleRowCount="15" 
+		   visibleRowCountMode ="Interactive"
 		   filter="filterPrice" 
-		   ariaLabelledBy="title">
+		  selectionMode = "Single">
 
-		   	<extension>
-					<m:OverflowToolbar style="Clear">
-						<m:Title id="title" text="Products"/>
-						<m:ToolbarSpacer/>
-						<m:Button
-							icon="sap-icon://decline"
-							tooltip="Clear all filters"
-							press="clearAllFilters"/>
-						<m:ToolbarSeparator/>
-					</m:OverflowToolbar>
-				</extension>
+		  <extension>
+				<m:OverflowToolbar style="Clear"  >
+				<m:ToolbarSpacer/>
+					<m:VBox class="sapUiSmallMargin">
+						<m:DateRangeSelection
+							placeholder="Filtrar Data"
+							id="SaleDRS"
+							change=".changeDateSales" />
+					</m:VBox>		
+				</m:OverflowToolbar>
+		 </extension>
 
         <columns>
             <Column 
-				width="11rem" 
-				filterProperty="Name">
+				width="15%" 
+				sortProperty="sale_id">
                 <m:Label text="VENDA" />
                 <template>
-                    <m:Text text="{modelVenda>sale_id}" wrapping="false" />
+                    <m:Text text="{modelVenda>sale_id}"  />
                 </template>
             </Column>
+
             <Column 
-				width="11rem" 
-				filterProperty="Category" 
-				defaultFilterOperator="StartsWith">
+				width="20%" 
+				sortProperty="gross_amount_sl">
                 <m:Label text="TOTAL VENDA(R$)" />
                 <template>
-                    <u:Currency value="{modelVenda>gross_amount_sl}" currency="{CurrencyCode}" wrapping="false" />
+                    <u:Currency value="{modelVenda>gross_amount_sl}" currency="{CurrencyCode}" />
                 </template>
             </Column>
-            <Column width="9rem"
-			filterProperty="Data" >
+
+            <Column 
+				width="20%" 
+				sortProperty="creationdate_sl">
                 <m:Label text="DATA" />
                 <template>
                     <m:Text text="{path: 'modelVenda>creationdate_sl',
 								  type: 'sap.ui.model.type.Date',
-								  formatOptions: {style: 'short'}} " wrapping="false" />
+								  formatOptions: {style: 'short'}} "  />
                 </template>
             </Column>
             
             <Column 
-				id="price" 
-				width="9rem" 
-				filterProperty="Price">
+				width="30%" 
+				filterProperty="fullName_sl"
+				sortProperty="fullName_sl">
                 <m:Label text="CLIENTE" />
                 <template>
-                    <m:Text text="{modelVenda>fullName_sl}"  wrapping="false" />
+                    <m:Text text="{modelVenda>fullName_sl}" />
                 </template>
             </Column>
+
             <Column 
-				width="6rem" 
+				width="10%" 
 				hAlign="End" >
                 <m:Label text="" />
                 <template>
-                    <m:Label text="{}" />
+                    <m:Button  text="Itens" icon="sap-icon://sales-order-item" press="onPressItemSale"/>
                 </template>
             </Column>
+
         </columns>
+
         <footer>
             <m:OverflowToolbar id="infobar" ></m:OverflowToolbar>
         </footer>
     </Table>
-
-		
-<!--	<Table id="idProductsTable3"
-		inset="false"
-		items="{
-			path: 'modelVenda>/aVenda',
-			sorter: {
-				path: 'Name'
-			}
-		}">
-
-		<headerToolbar>
-			<OverflowToolbar>
-				<VBox class="sapUiSmallMargin" >
-
-					<DateRangeSelection 
-						id="SaleDRS"
-						change=".changeDateSales" />
-
-				</VBox>
-			</OverflowToolbar>
-		</headerToolbar>
-
-		<columns>
-			
-			<Column
-				width="20%">
-				<Text text="VENDA" />
-			</Column>
-
-            <Column
-				width="20%">
-				<Text text="TOTAL VENDA(R$)" />
-			</Column>
-
-            <Column
-				width="20%">
-				<Text text="DATA"/>
-			</Column>
-
-			<Column
-				width="30%">
-				<Text text="CLIENTE"/>
-			</Column>
-
-            <Column
-				width="10%">
-				
-			</Column>
-
-		</columns>
-
-		<items>
-			<ColumnListItem vAlign="Middle">
-				<cells>
-					<Text text="{modelVenda>sale_id}" />					
-                    <Text text="{modelVenda>gross_amount_sl}" /> 
-
-                    <Text text= "{path: 'modelVenda>creationdate_sl',
-								  type: 'sap.ui.model.type.Date',
-								  formatOptions: {style: 'short'}} "/>
-								  
-					<Text text="{modelVenda>fullName_sl}" />
-										       
-					<Button text="Itens" icon="sap-icon://sales-order-item" press="onPressItemSale"/>
-												
-				</cells>
-
-			</ColumnListItem>
-		</items>
-	</Table> -->
 
 </core:FragmentDefinition>

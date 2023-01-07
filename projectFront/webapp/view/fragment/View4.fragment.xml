@@ -3,80 +3,91 @@
 	controllerName="sap.m.sample.Table.Table" 
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:core="sap.ui.core" 
-	xmlns="sap.m">
+	xmlns:m="sap.m"
+    xmlns="sap.ui.table"
+	xmlns:u="sap.ui.unified">
 
-    <Table 
-	id="idProductsTable" 
-	inset="false" 
-	items="{
-			path: 'modelCliente>/aCliente',
-			sorter: {
-				path: 'Name'
-			}
-		}">
-
-        <headerToolbar>
-            <OverflowToolbar />
-        </headerToolbar>
+<Table id="idProductsTable" 
+		   rows="{modelCliente>/aCliente}" 
+		   visibleRowCount="15" 
+		   visibleRowCountMode ="Interactive"
+		   filter="filterPrice" 
+		  selectionMode = "Single">
 
         <columns>
-            <Column width="8em">
-                <Text text="NOME" />
+            <Column 
+				width="15%" 
+                filterProperty="name_cli"
+				sortProperty="name_cli">
+                <m:Label text="NOME" />
+                <template>
+                    <m:Text text="{modelCliente>name_cli}"  />
+                </template>
             </Column>
 
-            <Column width="8em">
-                <Text text="SOBRENOME" />
+            <Column 
+				width="15%" 
+                filterProperty="surname_cli"
+				sortProperty="surname_cli">
+                <m:Label text="SOBRENOME" />
+                <template>
+                     <m:Text text="{modelCliente>surname_cli}"/>
+                </template>
             </Column>
 
-            <Column width="8em">
-                <Text text="TELEFONE" />
+            <Column 
+				width="15%">
+                <m:Label text="TELEFONE" />
+                <template>
+                    <m:Text text="{modelCliente>fone1_cli}"  />
+                </template>
             </Column>
-
-            <Column width="9em">
-                <Text text="WHATSAPP" />
-            </Column>
-
-            <Column width="13em">
-                <Text text="ENDEREÇO" />
-            </Column>
-
-            <Column width="6em">
-                <Text text="CEP" />
-            </Column>
-
-            <Column width="6em">
-                <Text text="" />
-            </Column>
-
             
-        </columns>
+            <Column 
+				width="15%">
+                <m:Label text="WHATSAPP" />
+                <template>
+                    <m:Text text="{modelCliente>fone2_cli}" />
+                </template>
+            </Column>
 
-        <items>
-            <ColumnListItem vAlign="Middle">
-                <cells>
-                    <Text text="{modelCliente>name_cli}" />
-                    <Text text="{modelCliente>surname_cli}" />
-                    <Text text="{modelCliente>fone1_cli}" />
-                    <Text text="{modelCliente>fone2_cli}" />
-                    <Text text="{modelCliente>adress_cli}" />
-                    <Text text="{modelCliente>cep_cli}" />
-                    
-					<HBox>
-					    <items>
-						    <MenuButton text="Opções">
+            <Column 
+				width="20%">
+                <m:Label text="ENDEREÇO" />
+                <template>
+                    <m:Text text="{modelCliente>adress_cli}" />
+                </template>
+            </Column>
+
+            <Column 
+				width="10%">
+                <m:Label text="CEP" />
+                <template>
+                    <m:Text text="{modelCliente>cep_cli}" />
+                </template>
+            </Column>
+
+             <Column 
+				width="10%">
+                <m:Label text="" />
+                <template>
+                    <m:HBox>
+					   <m:items>
+						    <m:MenuButton text="Opções">
 							   
-							    <Menu>
-							        <MenuItem text="Editar" icon="sap-icon://edit" press="onPressEdit"/>
+							    <m:Menu>
+							        <m:MenuItem text="Editar" icon="sap-icon://edit" press="onPressEdit"/>
 								
-							        <MenuItem text="Excluir" icon="sap-icon://delete" press="onPressDelete" />
-							    </Menu>
+							        <m:MenuItem text="Excluir" icon="sap-icon://delete" press="onPressDelete" />
+							    </m:Menu>
 
-						    </MenuButton>
-						</items>	
-					</HBox>	
-                    			
-                </cells>
-            </ColumnListItem>
-        </items>
+						    </m:MenuButton>
+						</m:items>	
+					</m:HBox>	
+                </template>
+            </Column>
+
+        </columns>
+        
     </Table>
 </core:FragmentDefinition>

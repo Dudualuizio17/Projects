@@ -30,24 +30,9 @@ sap.ui.define([
 			this.selectTotalSalesCash();
 			this.selectTotalSales();
 			this.initModelCaixa();
-			this._oGlobalFilter = null;
-			this._oPriceFilter = null;
+			
 
-
-
-
-
-			/*var oDataSetModelCaixa =
-			{
-				currency: "BRL",
-				price: 17600
-			}
-
-			var oModelCaixa = new JSONModel(oDataSetModelCaixa);
-			this.getView().setModel(oModelCaixa, "modelCaixa");*/
 		},
-
-
 
 		//Clientes
 		selectClientTable() {
@@ -544,7 +529,7 @@ sap.ui.define([
 					});
 
 					var oModelVenda = new JSONModel({
-						aVenda: oResponse.response
+						aVenda: aItenVendas
 					});
 
 					that.getView().setModel(oModelVenda, "modelVenda");
@@ -800,10 +785,46 @@ sap.ui.define([
 
 		//FILTRO DE DATA - VENDAS
 		openDateRangeSelection: function (oEvent) {
+			debugger
 			this.getView().byId("SaleDRS").openBy(oEvent.getSource().getDomRef());
 		},
 
 		changeDateSales: function (oEvent) {
+			debugger
+			var that = this;
+			var oDataPayload ={
+
+				"sDataInicio" : oEvent.getSource().getDateValue().toISOString().slice(0, 10),
+				"sDataFinal" : oEvent.getSource().getSecondDateValue().toISOString().slice(0, 10)
+	
+				}
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:3000/vendas/filterDate",
+				data: oDataPayload,
+				success: function (oResponse) {
+					debugger
+					var aItenVendas = oResponse.response;
+
+					aItenVendas.forEach(oItemVenda => {
+						oItemVenda.creationdate_sl = new Date(oItemVenda.creationdate_sl)
+
+					});
+
+					var oModelVenda = new JSONModel({
+						aVenda: aItenVendas
+					});
+
+					that.getView().setModel(oModelVenda, "modelVenda");
+
+
+				},
+				error: function (oResponse) {
+					debugger
+				}
+				});
+
+
 			MessageToast.show("Data escolhida: " + oEvent.getParameter("value"));
 		},
 
@@ -968,88 +989,7 @@ sap.ui.define([
 			MessageToast.show("Data escolhida: " + oEvent.getParameter("value"));
 		},
 
-		_filter : function() {
-			var oFilter = null;
-
-			if (this._oGlobalFilter && this._oPriceFilter) {
-				oFilter = new Filter([this._oGlobalFilter, this._oPriceFilter], true);
-			} else if (this._oGlobalFilter) {
-				oFilter = this._oGlobalFilter;
-			} else if (this._oPriceFilter) {
-				oFilter = this._oPriceFilter;
-			}
-
-			this.byId("idProductsTable3").getBinding().filter(oFilter, "Application");
-		},
-
-		filterGlobally : function(oEvent) {
-			var sQuery = oEvent.getParameter("query");
-			this._oGlobalFilter = null;
-
-			if (sQuery) {
-				this._oGlobalFilter = new Filter([
-					new Filter("Name", FilterOperator.Contains, sQuery),
-					new Filter("Category", FilterOperator.Contains, sQuery)
-				], false);
-			}
-
-			this._filter();
-		},
-
-		filterPrice : function(oEvent) {
-			var oColumn = oEvent.getParameter("column");
-			if (oColumn != this.byId("price")) {
-				return;
-			}
-
-			oEvent.preventDefault();
-
-			var sValue = oEvent.getParameter("value");
-
-			function clear() {
-				this._oPriceFilter = null;
-				oColumn.setFiltered(false);
-				this._filter();
-			}
-
-			if (!sValue) {
-				clear.apply(this);
-				return;
-			}
-
-			var fValue = null;
-			try {
-				fValue = parseFloat(sValue, 10);
-			} catch (e){
-				// nothing
-			}
-
-			if (!isNaN(fValue)) {
-				this._oPriceFilter = new Filter("Price", FilterOperator.BT, fValue - 20, fValue + 20);
-				oColumn.setFiltered(true);
-				this._filter();
-			} else {
-				clear.apply(this);
-			}
-		},
-		clearAllFilters : function(oEvent) {
-			var oTable = this.byId("table");
-
-			var oUiModel = this.getView().getModel("ui");
-			oUiModel.setProperty("/globalFilter", "");
-
-			oUiModel.setProperty("/availabilityFilterOn", false);
-
-			this._oGlobalFilter = null;
-			this._oPriceFilter = null;
-			this._filter();
-
-			var aColumns = oTable.getColumns();
-			for (var i = 0; i < aColumns.length; i++) {
-				oTable.filter(aColumns[i], null);
-			}
-		},
-
+		
 
 
 	});

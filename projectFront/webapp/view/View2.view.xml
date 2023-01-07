@@ -14,13 +14,13 @@
 		initialMaster="master">
 		
 		<detailPages>
-
+			
             <Page
 				id="initialPage"
 				title="Betel Gás"
 				backgroundDesign= "Solid">
 			
-				<Label text="Revendedora Autorizada"/>
+				<Label text ="Revendedora Autorizada"  class="sapUiSmallMargin"/>
 
 				<headerContent class="sapUiContentPadding" >
 				<Label text="Modo Escuro" class="headerHomeFont"/>		
@@ -33,10 +33,11 @@
 				</HBox>
 			</headerContent>
 		
-            <VBox>
-				<Image src="/image/NacionalGas.png" width="10.8em"/>
-			</VBox>
+            <HBox class="sapUiSmallMargin">
+				<Image src="/image/NacionalGas.png" width="50%"/>
+			</HBox>
 			</Page>
+			
 		
 			<Page
 				id="client"

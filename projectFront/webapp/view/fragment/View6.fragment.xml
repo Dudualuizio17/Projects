@@ -4,77 +4,82 @@
 	controllerName="sap.m.sample.Table.Table"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
-	xmlns="sap.m">
+	xmlns:m="sap.m"
+	xmlns="sap.ui.table"
+	xmlns:u="sap.ui.unified">
 
-	<Table 
-		id="idProductsTable2"
-		inset="false"
-		items="{
-			path: 'modelProd>/aProduto',
-			sorter: {
-				path: 'Name'
-			}
-		}">
-		<headerToolbar>
-			<OverflowToolbar>
+	<Table id="idProductsTable2" 
+		   rows="{modelProd>/aProduto}" 
+		   visibleRowCount="15" 
+		   visibleRowCountMode ="Interactive"
+		   filter="filterPrice" 
+		  selectionMode = "Single">
+
+        <columns>
+            <Column 
+				width="20%" 
+				hAlign="Left"
+				filterProperty="name_pdt"
+				sortProperty="name_pdt">
+                <m:Label text="PRODUTO" />
+                <template>
+                    <m:Text text="{modelProd>name_pdt}"  />
+                </template>
+            </Column>
+
+            <Column 
+				width="30%" 
+				filterProperty="description_pdt"
+				sortProperty="description_pdt">
+                <m:Label text="DESCRIÇÃO" />
+                <template>
+                     <m:Text text="{modelProd>description_pdt}"/>
+                </template>
+            </Column>
+
+            <Column 
+				width="10%" 
+				sortProperty="price_pdt">
+                <m:Label   text="PREÇO" />
+                <template>
+                    <u:Currency value="{modelProd>price_pdt}"/>
+                </template>
+            </Column>
+            
+            <Column 
+				width="20%" 
+				hAlign="Center"
+				sortProperty="stock_control_pdt">
+                <m:Label text="QUANTIDADE ESTOQUE" />
+                <template>
+                    <m:Text text="{modelProd>stock_control_pdt}" />
+                </template>
+            </Column>
+
+            <Column 
+				width="10%">
 				
-			</OverflowToolbar>
-		</headerToolbar>
-
-		<columns>
-			
-			<Column
-				width="12em">
-				<Text text="PRODUTO" />
-			</Column>
-
-            <Column
-                 width="12em">
-				<Text text="DESCRIÇÃO" />
-			</Column>
-
-            <Column
-				width="12em">
-				<Text text="PREÇO" />
-			</Column>
-
-            <Column
-				width="12em">
-				<Text text="QUANTIDADE ESTOQUE" />
-			</Column>
-
-			<Column
-				width="5em">
-				<Text text=" " />
-			</Column>
-
-		</columns>
-
-		<items>
-			<ColumnListItem vAlign="Middle">
-				<cells>
-					<Text text="{modelProd>name_pdt}" />
-					<Text text="{modelProd>description_pdt}" />
-                    <Text text="{modelProd>price_pdt}" />
-                    <Text text="{modelProd>stock_control_pdt}" />
-					  
-					<HBox>
-					    <items>
-						    <MenuButton text="Opções">
+                <m:Label text="" />
+                <template>
+                    <m:HBox>
+					    <m:items>
+						    <m:MenuButton text="Opções">
 							   
-							    <Menu>
-							        <MenuItem text="Editar" icon="sap-icon://edit" press="onPressEditProd"/>
+							    <m:Menu>
+							        <m:MenuItem text="Editar" icon="sap-icon://edit" press="onPressEditProd"/>
 								
-							        <MenuItem text="Excluir" icon="sap-icon://delete" press="onPressDeleteProd"/>
-							    </Menu>
+							        <m:MenuItem text="Excluir" icon="sap-icon://delete" press="onPressDeleteProd"/>
+							    </m:Menu>
 
-						    </MenuButton>
-						</items>	
-					</HBox>	
+						    </m:MenuButton>
+						</m:items>	
+					</m:HBox>	
+                </template>
+            </Column>
 
-				</cells>
+        </columns>
 
-			</ColumnListItem>
-		</items>
-	</Table>
+        
+    </Table>
+
 </core:FragmentDefinition>
