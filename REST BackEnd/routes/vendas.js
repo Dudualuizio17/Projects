@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('../mysql').pool;
 
-//RETORNA O VALOR TOTAL DE VENDAS (CAIXA)
+//RETORNA O VALOR TOTAL DE VENDAS (Quantidade de Vendas)
 router.get('/salesTotal', (req, res, next) => {
     debugger
 
@@ -22,7 +22,7 @@ router.get('/salesTotal', (req, res, next) => {
 
 });
 
-//RETORNA O VALOR TOTAL DE VENDAS (CAIXA)
+//RETORNA O VALOR TOTAL DE VENDAS (TOTAL CAIXA)
 router.get('/caixa', (req, res, next) => {
     debugger
 
@@ -31,6 +31,60 @@ router.get('/caixa', (req, res, next) => {
         conn.query(
             `SELECT SUM (gross_amount_sl) As valorTotal   
             FROM sale`,
+
+            (error, resultado, fields) => {
+                debugger
+                if (error) { return res.status(500).send({ error: error }) }
+                return res.status(200).send({ response: resultado })
+            }
+        )
+    })
+
+});
+
+//RELACIONADO AO FILTRO DE DATA  DE VENDAS (TOTAL CAIXA)
+router.get('/FiltroVendasCaixa', (req, res, next) => {
+    debugger
+
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }) }
+        conn.query(
+            `SELECT COUNT (sale_id) As vendasTotal   
+            FROM sale
+            WHERE creationdate_sl >= ? 
+            AND creationdate_sl <= ?` ,
+
+            [
+                req.query.sDataInicioCaixa,
+                req.query.sDataFinalCaixa
+            ],
+            
+            (error, resultado, fields) => {
+                debugger
+                if (error) { return res.status(500).send({ error: error }) }
+                return res.status(200).send({ response: resultado })
+            }
+        )
+    })
+
+});
+
+//RELACIONADO AO FILTRO DE DATA DO CAIXA (TOTAL CAIXA)
+router.get('/filtroCaixa', (req, res, next) => {
+    debugger
+
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }) }
+        conn.query(
+            `SELECT SUM (gross_amount_sl) As valorTotal   
+            FROM sale
+            WHERE creationdate_sl >= ? 
+            AND creationdate_sl <= ?` ,
+
+            [
+                req.query.sDataInicioCaixa,
+                req.query.sDataFinalCaixa
+            ],
 
             (error, resultado, fields) => {
                 debugger
@@ -61,6 +115,33 @@ router.get('/sale', (req, res, next) => {
         )
     })
 
+});
+
+//RELACIONADO AO FILTRO DE DATA DAS VENDAS
+router.get('/:filterDate', (req, res, next) => {
+    
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }) }
+        conn.query(
+            `SELECT sale_id , gross_amount_sl, creationdate_sl,
+            CONCAT(name_cli, " ", surname_cli) As fullName_sl 
+            FROM sale  
+            INNER JOIN client ON sale.client_id_cli = client.client_id_cli
+            WHERE creationdate_sl >= ? 
+            AND creationdate_sl <= ? 
+            ORDER BY sale_id DESC `,
+
+            [
+                req.query.sDataInicio,
+                req.query.sDataFinal
+            ],
+
+            (error, resultado, fields) => {
+                if (error) { return res.status(500).send({ error: error }) }
+                return res.status(200).send({ response: resultado })
+            }
+        )
+    })
 });
 
 //INSERE UMA VENDA
@@ -145,7 +226,7 @@ router.put('/', (req, res, next) => {
 });
 
 //EXCLUI UM PRODUTO
-router.delete('/sale', (req, res, next) => {
+/*router.delete('/sale', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
         conn.query(
@@ -161,7 +242,7 @@ router.delete('/sale', (req, res, next) => {
 
         )
     })
-});
+});*/
 
 
 

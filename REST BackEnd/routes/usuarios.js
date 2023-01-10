@@ -18,6 +18,34 @@ router.get('/user_betelgas', (req, res, next) => {
 
 });
 
+//VALIDAÇÃO DE LOGIN
+router.post('/validate', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }) }
+        conn.query(
+            `SELECT   * 
+            FROM user_betelgas
+            WHERE user_name = ?
+            AND password = ?`,
+
+        [ 
+            req.body.sUserValidate,
+            req.body.sPasswordValidade,
+        ],
+            
+            (error, resultado, field) => {
+                conn.release();
+                if(error) { return res.status(500).send({ error: error})}
+
+                res.status(201).send({response: resultado})
+            }
+
+        )
+    })
+
+
+});
+
 //INSERE UM USUÁRIO
 router.post('/user_betelgas', (req, res, next) => {
     mysql.getConnection((error, conn) => {
