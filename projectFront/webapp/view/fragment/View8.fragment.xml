@@ -18,6 +18,7 @@
 		  <extension>
 				<m:OverflowToolbar style="Clear"  >
 				<m:ToolbarSpacer/>
+				<m:Button text="Remover Filtro" press="onPressClearFilterSale" />
 					<m:VBox class="sapUiSmallMargin">
 						<m:DateRangeSelection
 							placeholder="Filtrar Data"

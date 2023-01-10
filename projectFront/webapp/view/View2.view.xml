@@ -141,13 +141,19 @@
                 showNavButton="true"
 				navButtonPress=".onPressDetailBack">
 
-					<HeaderContainer id="container1">
-						<VBox class="sapUiSmallMargin" width="150%" >
-							<DateRangeSelection 
-							id="TotalDRS"
-							change=".changeDateTotal"/>
-					</VBox>
-					</HeaderContainer>
+				
+				<HeaderContainer id="container1">
+					<OverflowToolbar style="Clear"  >
+						<ToolbarSpacer/>
+							<Button text="Remover Filtro" press="onPressClearFilterCashier" />
+								<VBox class="sapUiSmallMargin">
+								<DateRangeSelection
+									placeholder="Filtrar Data"
+									id="TotalDRS"
+									change=".changeDateTotal"/>
+								</VBox>		
+						</OverflowToolbar>
+				</HeaderContainer>
 
 					<l:VerticalLayout  width="50%" >
 						<l:BlockLayout id="idMainBlock">

@@ -7,17 +7,22 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/m/List",
 	"sap/m/StandardListItem",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/core/UIComponent"
+	
 
 
-], function (MessageToast, Controller, Log, JSONModel, Text, Button, List, StandardListItem, Filter, FilterOperator) {
+], function (MessageToast, Controller, Log, JSONModel, Text, Button, List, StandardListItem, UIComponent) {
 	"use strict";
 
 	return Controller.extend("projectbetelgas.controller.View2", {
 
 
-		onInit() {
+		onInit() { 
+			debugger
+			var that = this;
+			if ( !window.HotDog ) {
+				 UIComponent.getRouterFor(that).navTo("RouteView1")
+			}
 
 			window.modoFormularioCliente = "cadastro";
 			window.modoFormularioProduto = "cadastroProd";
@@ -792,18 +797,26 @@ sap.ui.define([
 		changeDateSales: function (oEvent) {
 			debugger
 			var that = this;
+			if (oEvent.getSource().getDateValue() == "" || oEvent.getSource().getSecondDateValue() == null) {
+						MessageToast.show("Inserir data")
+		
+						return
+					};
+			var aData = oEvent.getSource().getSecondDateValue().toLocaleDateString().split('/');
+			var sDataFinalFormatoBanco = aData[2] +'-'+aData[1]+'-'+aData[0];
 			var oDataPayload ={
 
 				"sDataInicio" : oEvent.getSource().getDateValue().toISOString().slice(0, 10),
-				"sDataFinal" : oEvent.getSource().getSecondDateValue().toISOString().slice(0, 10)
-	
-				}
+				"sDataFinal" : sDataFinalFormatoBanco
+				};
 			$.ajax({
 				type: "GET",
 				url: "http://localhost:3000/vendas/filterDate",
 				data: oDataPayload,
 				success: function (oResponse) {
 					debugger
+
+				
 					var aItenVendas = oResponse.response;
 
 					aItenVendas.forEach(oItemVenda => {
@@ -826,6 +839,13 @@ sap.ui.define([
 
 
 			MessageToast.show("Data escolhida: " + oEvent.getParameter("value"));
+		},
+
+		onPressClearFilterSale: function(){
+			debugger
+			this.getView().byId("SaleDRS").setValue()
+			this.selectSalesTable();
+
 		},
 
 		clearFormInputSale: function () {
@@ -985,12 +1005,63 @@ sap.ui.define([
 
 		changeDateTotal: function (oEvent) {
 			debugger
+			var that = this;
+			var aDataCaixa = oEvent.getSource().getSecondDateValue().toLocaleDateString().split('/');
+			var sDataFinalFormatoBancoCaixa = aDataCaixa[2] +'-'+aDataCaixa[1]+'-'+aDataCaixa[0];
+			var oDataCaixaPayload ={
+
+				"sDataInicioCaixa" : oEvent.getSource().getDateValue().toISOString().slice(0, 10),
+				"sDataFinalCaixa" : sDataFinalFormatoBancoCaixa
+				};
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:3000/vendas/filtroCaixa",
+				data: oDataCaixaPayload,
+				success: function (oResponse) {
+					debugger
+
+					var sCaixa = oResponse.response[0].valorTotal;
+
+					that.getView().getModel("modelCaixa").setProperty("/sCaixa", sCaixa);
+
+
+				},
+				error: function (oResponse) {
+					debugger
+				}
+				});
+
+				$.ajax({
+					type: "GET",
+					url: "http://localhost:3000/vendas/FiltroVendasCaixa",
+					data: oDataCaixaPayload,
+					success: function (oResponse) {
+						debugger
+	
+						var sVendas = oResponse.response[0].vendasTotal;
+	
+						that.getView().getModel("modelCaixa").setProperty("/sVendas", sVendas);
+	
+	
+					},
+					error: function (oResponse) {
+						debugger
+					}
+					});
+
 			
 			MessageToast.show("Data escolhida: " + oEvent.getParameter("value"));
 		},
 
+		onPressClearFilterCashier: function(){
+			debugger
+			this.getView().byId("TotalDRS").setValue();
+			this.selectTotalSalesCash();
+			this.selectTotalSales();
+
+		},
+
 		
-
-
+	
 	});
 });
