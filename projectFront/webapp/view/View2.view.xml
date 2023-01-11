@@ -23,19 +23,21 @@
 				<Label text ="Revendedora Autorizada"  class="sapUiSmallMargin"/>
 
 				<headerContent class="sapUiContentPadding" >
-				<Label text="Modo Escuro" class="headerHomeFont"/>		
-				<HBox>
-					<Switch change=".onPressDarkMode" id="DarkMode" state="false" >
-						<layoutData>
-							<FlexItemData growFactor="1" />
-						</layoutData>
-					</Switch>
-				</HBox>
-			</headerContent>
+					<Label text="Modo Escuro" class="headerHomeFont"/>		
+					<HBox>
+						<Switch change=".onPressDarkMode" id="DarkMode" state="false" >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Switch>
+					</HBox>
+				</headerContent>
 		
-            <HBox class="sapUiSmallMargin">
-				<Image src="/image/NacionalGas.png" width="50%"/>
-			</HBox>
+				<HBox height="90%" alignItems="Center" justifyContent="Center">
+
+					<Image src="/image/chama-removebg.png" width="90%"/>  
+
+				</HBox>
 			</Page>
 			
 		

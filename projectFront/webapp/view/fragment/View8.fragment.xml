@@ -70,7 +70,7 @@
 
             <Column 
 				width="10%" 
-				hAlign="End" >
+				hAlign="Center" >
                 <m:Label text="" />
                 <template>
                     <m:Button  text="Itens" icon="sap-icon://sales-order-item" press="onPressItemSale"/>
